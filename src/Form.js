@@ -80,8 +80,9 @@ export default withFormik({
             .string().email('Invalid Email')
             .required('Email is a required field'),
         password: Yup
-            .mixed(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-            "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
+            .string()
+                .matches(/[a-zA-Z0-9]/, 'Password may only contain numbers or letters')
+                .min(8, 'Passward must contain 8 characters')
             .required('Password is a required field'),
         tos: Yup
             .boolean()
