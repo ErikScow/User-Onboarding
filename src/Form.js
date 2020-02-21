@@ -7,33 +7,33 @@ import axios from 'axios'
 const UserForm = props => {
     return(
         <div>
-            <Form>
-                <label>
+            <Form className='form'>
+                <label className='form-element'>
                     Name:
                     <Field type='text' name='name' placeholder='name'/>
                     {props.touched.name && props.errors.name && (
-                        <p>{props.errors.name}</p>
+                        <p className='error-message'>{props.errors.name}</p>
                     )}
                 </label>
-                <label>
+                <label className='form-element'>
                     Email:
                     <Field type='text' name='email' placeholder='email'/>
                     {props.touched.email && props.errors.email && (
-                        <p>{props.errors.email}</p>
+                        <p className='error-message'>{props.errors.email}</p>
                     )}
                 </label>
-                <label>
+                <label className='form-element'>
                     Password:
                     <Field type='password' name='password'/>
                     {props.touched.password && props.errors.password && (
-                        <p>{props.errors.password}</p>
+                        <p className='error-message'>{props.errors.password}</p>
                     )}
                 </label>
-                <label>
+                <label className='form-element'>
                     Have you read and agreed to the terms of service?:
                     <Field type='checkbox' name='tos'></Field>
                     {props.touched.tos && props.errors.tos && (
-                        <p>{props.errors.tos}</p>
+                        <p className='error-message'>{props.errors.tos}</p>
                     )}
                 </label>
                 <button type="submit">Submit</button>
