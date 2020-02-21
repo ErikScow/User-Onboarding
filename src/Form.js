@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 
 import { withFormik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import axios from 'axios'
 
 const UserForm = props => {
+
+    const [users, setUsers] = useState([])
+
+    console.log('status', props.status)
+
+    useEffect(() => {
+        props.status && setUsers([...users, props.status])
+    }, [props.status])
+
+    console.log('users', users)
+
     return(
         <div>
             <Form className='form'>
@@ -38,6 +49,17 @@ const UserForm = props => {
                 </label>
                 <button type="submit">Submit</button>
             </Form>
+            <div className='list-container'>
+                <h3>User List</h3>
+                <ul>
+                    {users.map((user,i) => {
+                        console.log('USER ARRAY ITEM', user)
+                        return(
+                        <li key={i}>{user.name}</li>
+                        )
+                    })}
+                </ul>
+            </div>
         </div>
     )
 }
@@ -66,11 +88,13 @@ export default withFormik({
             .oneOf([true], 'Please read and agree to the terms of service')
     }),
 
-    handleSubmit(values){
+    handleSubmit(values, { setStatus, resetForm }){
         console.log(values)
-        axios.post('https://reqres.in/api/user')
+        axios.post('https://reqres.in/api/user', values)
             .then(response => {
                 console.log(response)
+                setStatus(response.data)
+                resetForm()
             })
             .catch(error => console.log(error))
     }
