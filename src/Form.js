@@ -42,5 +42,10 @@ export default withFormik({
 
     handleSubmit(values){
         console.log(values)
+        axios.post('https://reqres.in/api/user')
+            .then(response => {
+                console.log(response)
+            })
+            .catch(error => console.log(error))
     }
 })(UserForm)
